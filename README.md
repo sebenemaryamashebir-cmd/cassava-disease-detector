@@ -1,4 +1,4 @@
-# Cassava Disease Detector 🌿
+# Cassava Disease Detector
 
 A deep learning system that classifies cassava leaf photos into one of five categories, paired with a full-stack web app (FastAPI + React) that lets users upload a photo and get an instant diagnosis plus an AI-generated, farmer-facing recommendation.
 
