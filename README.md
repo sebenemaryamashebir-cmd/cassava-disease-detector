@@ -145,11 +145,11 @@ python-multipart
 pydantic
 ```
 
-## Team
+## Team 
 
-- Sebenemayram
-- Jedediah
-- Tracy
+- Sebenemaryam Ashebir Asnake
+- Jedidiah Klenam Dogbey 
+- Tracy-Phyron Jinor
 
 ## License
 
