@@ -1,25 +1,4 @@
-"""
-Train CassavaCNN on the real dataset, using Member 1's data pipeline
-(cassava_leaf_disease.ipynb, branch `tracy`) -- fixed to correctly separate
-train/val/test with the right transform on each, plus a class-weighted loss
-to handle the imbalance Member 1's EDA found.
 
-This replaces test_model_dummy.py now that real data exists. Two bugs from
-the original notebook are fixed here (see notes inline):
-
-  1. The notebook's `train_dataset = datasets.ImageFolder(..., transform=...)`
-     on cell 30 silently overwrote the 80/10/10 split from cell 22, training
-     on the FULL dataset (including what should've been held-out val/test data).
-  2. `val_dataset`/`test_dataset` pointed at the original untransformed
-     `dataset` object, which has no `ToTensor()` -- DataLoader can't batch
-     raw PIL images, so those loaders would crash as soon as they were used.
-
-Fix: split first (indices only), then wrap each split in a small class that
-applies the correct transform per split -- augmentation for train, plain
-resize+tensor for val/test.
-
-Run:  python train.py --data-dir /path/to/cassava_dataset --epochs 5
-"""
 
 import argparse
 import os
