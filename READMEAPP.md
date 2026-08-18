@@ -1,34 +1,15 @@
 # cassava-disease-detector
 # Cassava Leaf Doctor
 
-**FastAPI** (loads your teammate's PyTorch model + calls Gemini) → **React + Vite** frontend.
+**FastAPI** (loads  teammate's PyTorch model + calls Gemini) → **React + Vite** frontend.
 
 ```
 backend/    FastAPI app: /api/analyze takes a photo, returns diagnosis + recommendation
 frontend/   React app, leaf-green theme
 ```
 
-## 1. Get the model file from your teammate
 
-Two ways they might have saved it — ask which one:
-
-- **TorchScript** (`torch.jit.save(...)`) — best case, it's self-contained.
-- **State dict** (`torch.save(model.state_dict(), ...)`) — you'll also need their
-  exact model class. Copy it into `backend/app/model_def/architecture.py`,
-  replacing the placeholder `CassavaModel` there.
-
-Either way, drop the weights file into `backend/weights/` (see the note file
-already in that folder).
-
-**Also ask your teammate:**
-- What image size did they train at (224? 380?) — set `IMG_SIZE` in `.env` to match.
-- What are the class names, and in what order? The placeholder in
-  `backend/app/config.py` (`CLASS_NAMES`) assumes the standard 5-class Kaggle
-  cassava set (CBB, CBSD, CGM, CMD, Healthy) — if theirs differs, edit that list
-  to match the exact order their model was trained with. Getting this wrong
-  won't crash anything, it'll just silently mislabel every prediction.
-
-## 2. Backend
+## 1. Backend
 
 ```bash
 cd backend
@@ -40,8 +21,8 @@ cp .env.example .env
 ```
 
 Edit `.env`:
-- `MODEL_WEIGHTS_PATH` — should already point at `weights/cassava_model.pt`, rename to match your actual file
-- `IMG_SIZE` — match your teammate's training size
+- `MODEL_WEIGHTS_PATH` — should already point at `weights/cassava_model1.pt`
+- `IMG_SIZE` — matches teammate's training size
 - `GEMINI_API_KEY` — get one free at https://aistudio.google.com/apikey
 - `GEMINI_MODEL` — defaults to `gemini-flash-latest`; check
   https://ai.google.dev/gemini-api/docs/models if it errors, since Google
@@ -56,7 +37,7 @@ Check `http://127.0.0.1:8000/api/health` — should return `{"status":"ok"}`. If
 fails to start, the error will usually be the model file not being found, or the
 architecture not matching the state_dict.
 
-## 3. Frontend
+## 2. Frontend
 
 ```bash
 cd frontend
